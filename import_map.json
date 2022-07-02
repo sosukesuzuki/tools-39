@@ -1,5 +1,8 @@
 {
   "imports": {
-    "flags/": "https://deno.land/std@0.146.0/flags/"
+    "flags/": "https://deno.land/std@0.146.0/flags/",
+    "datetime/": "https://deno.land/std@0.146.0/datetime/",
+    "unified/": "https://jspm.dev/unified@10.1.2/",
+    "remark-parse/": "https://cdn.skypack.dev/remark-parse@10?dts/"
   }
 }

@@ -9,7 +9,7 @@ const help = `tools-39 ${VERSION}
 Command line tools for following TC39 activity.
 
 SUBCOMMANDS:
-    agendas    Prints proposals introduced at the meeting for the month specified in YYYY/MM`;
+    agendas    Prints proposals introduced at the meeting for the month specified in yyyy/MM`;
 
 const args = parse(Deno.args, {
   alias: {
