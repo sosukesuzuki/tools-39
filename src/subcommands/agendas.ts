@@ -1,15 +1,10 @@
 import { parse } from "datetime/mod.ts";
-import parseMarkdown from "../utils/parse-markdown.ts";
 import leftPad from "../utils/left-pad.ts";
+import parseMarkdown from "../utils/parse-markdown.ts";
+import { unistVisit } from "../../deps.ts";
 
 export interface Args {
   help: boolean;
-}
-
-function getAgendasURL(year: number, month: number) {
-  const stringifiedYear = `${year}`;
-  const stringifiedMonth = `${leftPad(month, 2, "0")}`;
-  return `https://raw.githubusercontent.com/tc39/agendas/HEAD/${stringifiedYear}/${stringifiedMonth}.md`;
 }
 
 const help = `tools-39 agendas
@@ -56,7 +51,35 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
   const res = await fetch(agendaURL);
   const mdText = await res.text();
 
-  const parsed = parseMarkdown(mdText);
+  const ast = parseMarkdown(mdText);
+  getProposalsTable(ast);
+}
 
-  console.log(parsed.content);
+function getAgendasURL(year: number, month: number) {
+  const stringifiedYear = `${year}`;
+  const stringifiedMonth = `${leftPad(String(month), 2, "0")}`;
+  return `https://raw.githubusercontent.com/tc39/agendas/HEAD/${stringifiedYear}/${stringifiedMonth}.md`;
+}
+
+function getProposalsTable(ast: any): void {
+  unistVisit(ast, "listItem", (node) => {
+    const includesProposalsTable = ((child) => {
+      if (
+        child.type === "paragraph" &&
+        child.children[0].type === "text" &&
+        child.children[0].value === "Proposals"
+      ) {
+        return true;
+      }
+      return false;
+    })(node.children[0]);
+
+    if (includesProposalsTable) {
+      const maybeTable = node.children[1];
+      if (maybeTable.type === "table") {
+        const table = maybeTable;
+        console.log(table.children);
+      }
+    }
+  });
 }

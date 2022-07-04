@@ -1,8 +1,7 @@
-import { unified } from "unified/index.js";
-import remarkParse from "https://cdn.skypack.dev/remark-parse@10";
+import { unified, remarkParse, remarkGfm } from "../../deps.ts";
 
-export default function parseMarkdown(mdText: string) {
-  const processor = unified().use(remarkParse);
-  const ast = processor.parse(mdText);
-  return ast;
+export default function parseMarkdown(text: string) {
+  const processor = unified().use(remarkParse).use(remarkGfm);
+  const res = processor.parse(text);
+  return res;
 }
