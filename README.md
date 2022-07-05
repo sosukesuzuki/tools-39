@@ -2,6 +2,12 @@
 
 Command line tool for following TC39 activities.
 
+## Installation
+
+```
+deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/tools39/tools-39.ts
+```
+
 ## Usage
 
 ### `tools-39 agendas yyyy/MM`
