@@ -25,5 +25,4 @@ $ tools-39 agendas 2022/03
 - [Intl.MessageFormat](https://github.com/dminor/proposal-intl-messageformat/) for Stage 1 ([slides](https://docs.google.com/presentation/d/1oThTeL_n5-HAfmJTri-i8yU2YtHUvj9AakmWiyRGPlw))
 - [Function.prototype.once](https://github.com/js-choi/proposal-function-once) for Stage 1 ([slides](https://docs.google.com/presentation/d/1M0bzEEBZGfb_gIDVjIytbfYnLUhG7EN9iUTx6KJE2po/edit?usp=sharing))
 - [Types as Comments](https://github.com/giltayar/proposal-types-as-comments/) for Stage 1 ([slides](https://1drv.ms/b/s!AltPy8G9ZDJdq28xR8VuAcaIyq3h?e=quwXQB))
-
 ```

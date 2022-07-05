@@ -8,12 +8,12 @@ import { gfmTableToMarkdown } from "https://esm.sh/mdast-util-gfm-table@1.0.4";
 import { visit as unistVisit } from "https://esm.sh/unist-util-visit@4.1.0";
 
 export {
-  unified,
-  remarkParse,
-  remarkGfm,
-  toMarkdown,
-  gfmTableToMarkdown,
-  unistVisit,
-  flags,
   datetime,
+  flags,
+  gfmTableToMarkdown,
+  remarkGfm,
+  remarkParse,
+  toMarkdown,
+  unified,
+  unistVisit,
 };

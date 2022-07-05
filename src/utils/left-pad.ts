@@ -1,7 +1,7 @@
 export default function leftpad(
   str: string,
   len: number,
-  ch?: string | number
+  ch?: string | number,
 ) {
   str = String(str);
   let i = -1;

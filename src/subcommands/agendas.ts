@@ -22,8 +22,9 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
     console.log(help);
     Deno.exit(0);
   }
-  const rawMonthSpecifier: string | null =
-    typeof rawArgs._[0] === "string" ? rawArgs._[0] : null;
+  const rawMonthSpecifier: string | null = typeof rawArgs._[0] === "string"
+    ? rawArgs._[0]
+    : null;
   if (rawMonthSpecifier === null) {
     console.error(help);
     console.error(`No month specifier given.`);
@@ -67,7 +68,7 @@ function getAgendasURL(year: number, month: number) {
 
 function getProposals(
   // deno-lint-ignore no-explicit-any
-  ast: any
+  ast: any,
 ): string[] {
   const proposals: string[] = [];
   unistVisit(ast, "listItem", (node) => {
@@ -86,23 +87,25 @@ function getProposals(
       const maybeTable = node.children.find(
         (
           // deno-lint-ignore no-explicit-any
-          child: any
-        ) => child.type === "table"
+          child: any,
+        ) => child.type === "table",
       );
       if (maybeTable) {
         const table = maybeTable;
-        for (const row of table.children.filter(
-          (
-            // deno-lint-ignore no-explicit-any
-            child: any,
-            i: number
-          ) => i !== 0 && child.type === "tableRow"
-        )) {
+        for (
+          const row of table.children.filter(
+            (
+              // deno-lint-ignore no-explicit-any
+              child: any,
+              i: number,
+            ) => i !== 0 && child.type === "tableRow",
+          )
+        ) {
           const proposalCell = row.children.filter(
             (
               // deno-lint-ignore no-explicit-any
-              child: any
-            ) => child.type === "tableCell"
+              child: any,
+            ) => child.type === "tableCell",
           )[3];
           proposals.push(toMarkdown(proposalCell));
         }
