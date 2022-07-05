@@ -65,7 +65,10 @@ function getAgendasURL(year: number, month: number) {
   return `https://raw.githubusercontent.com/tc39/agendas/HEAD/${stringifiedYear}/${stringifiedMonth}.md`;
 }
 
-function getProposals(ast: any): string[] {
+function getProposals(
+  // deno-lint-ignore no-explicit-any
+  ast: any
+): string[] {
   const proposals: string[] = [];
   unistVisit(ast, "listItem", (node) => {
     const includesProposalsTable = ((child) => {
@@ -81,15 +84,25 @@ function getProposals(ast: any): string[] {
 
     if (includesProposalsTable) {
       const maybeTable = node.children.find(
-        (child: any) => child.type === "table"
+        (
+          // deno-lint-ignore no-explicit-any
+          child: any
+        ) => child.type === "table"
       );
       if (maybeTable) {
         const table = maybeTable;
         for (const row of table.children.filter(
-          (child: any, i: number) => i !== 0 && child.type === "tableRow"
+          (
+            // deno-lint-ignore no-explicit-any
+            child: any,
+            i: number
+          ) => i !== 0 && child.type === "tableRow"
         )) {
           const proposalCell = row.children.filter(
-            (child: any) => child.type === "tableCell"
+            (
+              // deno-lint-ignore no-explicit-any
+              child: any
+            ) => child.type === "tableCell"
           )[3];
           proposals.push(toMarkdown(proposalCell));
         }
