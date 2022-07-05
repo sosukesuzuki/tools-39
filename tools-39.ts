@@ -1,6 +1,6 @@
-#!/usr/bin/env -S deno run --allow-read --allow-env --allow-net --allow-run
+#!/usr/bin/env -S deno run --allow-net
 
-import { parse } from "flags/mod.ts";
+import { flags } from "./deps.ts";
 import agendasSubcommand from "./src/subcommands/agendas.ts";
 
 const VERSION = "1.0.0";
@@ -11,7 +11,7 @@ Command line tools for following TC39 activity.
 SUBCOMMANDS:
     agendas    Prints proposals introduced at the meeting for the month specified in yyyy/MM`;
 
-const args = parse(Deno.args, {
+const args = flags.parse(Deno.args, {
   alias: {
     help: "h",
     version: "V",

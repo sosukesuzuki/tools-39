@@ -1,7 +1,7 @@
-import { parse } from "datetime/mod.ts";
 import leftPad from "../utils/left-pad.ts";
 import parseMarkdown from "../utils/parse-markdown.ts";
-import { unistVisit } from "../../deps.ts";
+import toMarkdown from "../utils/to-markdown.ts";
+import { datetime, unistVisit } from "../../deps.ts";
 
 export interface Args {
   help: boolean;
@@ -36,7 +36,7 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
   }
   let parsedMonth;
   try {
-    parsedMonth = parse(rawMonthSpecifier, "yyyy/MM");
+    parsedMonth = datetime.parse(rawMonthSpecifier, "yyyy/MM");
   } catch {
     console.error(help);
     console.error(`Invalid month specifier given.`);
@@ -52,7 +52,11 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
   const mdText = await res.text();
 
   const ast = parseMarkdown(mdText);
-  getProposalsTable(ast);
+  const proposals = getProposals(ast);
+
+  const output = proposals.map((p) => `- ${p}`).join("");
+
+  console.log(output);
 }
 
 function getAgendasURL(year: number, month: number) {
@@ -61,7 +65,8 @@ function getAgendasURL(year: number, month: number) {
   return `https://raw.githubusercontent.com/tc39/agendas/HEAD/${stringifiedYear}/${stringifiedMonth}.md`;
 }
 
-function getProposalsTable(ast: any): void {
+function getProposals(ast: any): string[] {
+  const proposals: string[] = [];
   unistVisit(ast, "listItem", (node) => {
     const includesProposalsTable = ((child) => {
       if (
@@ -75,11 +80,21 @@ function getProposalsTable(ast: any): void {
     })(node.children[0]);
 
     if (includesProposalsTable) {
-      const maybeTable = node.children[1];
-      if (maybeTable.type === "table") {
+      const maybeTable = node.children.find(
+        (child: any) => child.type === "table"
+      );
+      if (maybeTable) {
         const table = maybeTable;
-        console.log(table.children);
+        for (const row of table.children.filter(
+          (child: any, i: number) => i !== 0 && child.type === "tableRow"
+        )) {
+          const proposalCell = row.children.filter(
+            (child: any) => child.type === "tableCell"
+          )[3];
+          proposals.push(toMarkdown(proposalCell));
+        }
       }
     }
   });
+  return proposals;
 }
