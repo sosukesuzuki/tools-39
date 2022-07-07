@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "release": "deno run --allow-run ./scripts/release.ts"
+  }
+}
