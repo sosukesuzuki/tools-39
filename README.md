@@ -15,20 +15,39 @@ deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no
 Example:
 
 ```
-$ tools-39 agendas 2022/03
-- [Array Grouping](https://github.com/tc39/proposal-array-grouping) [Status Update](https://github.com/tc39/proposal-array-grouping/issues/37)
-- [Resizable buffers](https://github.com/tc39/proposal-resizablearraybuffer) normative changes for [TA#set](https://github.com/tc39/proposal-resizablearraybuffer/pull/87) and [TA#subarray](https://github.com/tc39/proposal-resizablearraybuffer/pull/93) ([slides](https://docs.google.com/presentation/d/1QBbEnfWn9QAn48J1SAm3l5xJARE5wcKt3MlTlcVKIek/edit?usp=sharing))
-- [Temporal](https://github.com/tc39/proposal-temporal) update and normative changes ([slides](http://ptomato.name/talks/tc39-2022-03/))
-- [ShadowRealms Updates](https://docs.google.com/presentation/d/1Juv36nUTfcvb_E2NUeAPGuToCCBWIX0NLObx_h5qDYU)
-- [RegExp set notation + Unicode properties of strings](https://github.com/tc39/proposal-regexp-set-notation) for Stage 3 ([PR](https://github.com/tc39/ecma262/pull/2418), [spec preview with inline diffs](https://arai-a.github.io/ecma262-compare/?pr=2418), [slides](https://docs.google.com/presentation/d/1_rcjmR2YLZMMB0i4SdZ4RV6eiJB7WmXo_i82_nh7vNg/edit?usp=sharing))
-- [Change Array by Copy](https://github.com/tc39/proposal-change-array-by-copy) for Stage 3 ([Spec](https://tc39.es/proposal-change-array-by-copy/)) ([Tracker](https://github.com/tc39/proposal-change-array-by-copy/issues/74)) ([Slides](https://www.dropbox.com/s/5rabrx387snkbfn/change_array_by_copy_at_tc39_march_2022.pdf?dl=0))
-- Bikeshedding [pipe operator](https://github.com/tc39/proposal-pipeline-operator)’s topic token ([slides](https://docs.google.com/presentation/d/1dDucwsW8qM22yWLr_NHFmAiAltQSht3AXYW00kET4GA/edit?usp=sharing); see also [wiki page](https://github.com/tc39/proposal-pipeline-operator/wiki/Bikeshedding-the-Hack-topic-token) and [issue thread](https://github.com/tc39/proposal-pipeline-operator/issues/91))
-- [Decorators](https://github.com/tc39/proposal-decorators) for Stage 3 ([Tracker](https://github.com/tc39/proposal-decorators/issues/442), [spec preview with inline diffs](https://arai-a.github.io/ecma262-compare/?pr=2417), [slides](https://slides.com/pzuraq/decorators-for-stage-3-2022-03))
-- Bikeshedding [call-this](https://github.com/tc39/proposal-call-this) syntax ([slides](https://docs.google.com/presentation/d/1-MLGCibETPX8NiIvNJ1xOxiMS-NB8GCbDGNcB5patiU/edit?usp=sharing); see also [issue thread](https://github.com/tc39/proposal-bind-this/issues/10))
-- [Pattern matching](https://github.com/tc39/proposal-pattern-matching) for Stage 2 ([slides](https://docs.google.com/presentation/d/1sJoXU1ysK6eZn04pjnQ-1z6EetsVf9VfHeU0Ht8hiFQ))
-- [String.dedent](https://github.com/tc39/proposal-string-dedent) Status Update ([slides](https://docs.google.com/presentation/d/1fF4TqU6eLcj74s0wa1VSq5wGORSY1m1naekTNF9JAz4/edit?usp=sharing))
-- [Units Conversion](https://github.com/younies/unit-conversion-proposal) For stage 1 [slides](https://bit.ly/presentation-units-conversion)
-- [Intl.MessageFormat](https://github.com/dminor/proposal-intl-messageformat/) for Stage 1 ([slides](https://docs.google.com/presentation/d/1oThTeL_n5-HAfmJTri-i8yU2YtHUvj9AakmWiyRGPlw))
-- [Function.prototype.once](https://github.com/js-choi/proposal-function-once) for Stage 1 ([slides](https://docs.google.com/presentation/d/1M0bzEEBZGfb_gIDVjIytbfYnLUhG7EN9iUTx6KJE2po/edit?usp=sharing))
-- [Types as Comments](https://github.com/giltayar/proposal-types-as-comments/) for Stage 1 ([slides](https://1drv.ms/b/s!AltPy8G9ZDJdq28xR8VuAcaIyq3h?e=quwXQB))
+$ tools-39 agendas 2022/06
+# 2022/6 TC39 meeting agenda
+
+## For Stage 1
+
+- [Duplicate named capture groups](https://github.com/bakkot/proposal-duplicate-named-capturing-groups) for stage 1, 2, or 3
+- [`this` parameter](https://github.com/hax/proposal-this-parameter) for Stage 1, [slides](https://johnhax.net/2022/this-param/slide)
+- [RegExp Atomic Operators](https://github.com/rbuckton/proposal-regexp-atomic-operators) for Stage 1 ([draft spec](https://rbuckton.github.io/proposal-regexp-atomic-operators/), [slides](https://1drv.ms/p/s!AjgWTO11Fk-Tkf5fz_Ayyt6gEMkBgQ?e=6eFHfI))
+
+## For Stage 2
+
+- [String.dedent](https://github.com/tc39/proposal-string-dedent) for stage 2 ([draft spec](https://tc39.es/proposal-string-dedent/), [slides](https://docs.google.com/presentation/d/1hjTOVvQVH-ieWf5ECgojR_JQmfjjnm5abMq_eXpP_lU/edit?usp=sharing))
+- [Grouped and Auto-Accessors](https://github.com/tc39/proposal-grouped-and-auto-accessors) for stage 2 ([draft spec](https://tc39.es/proposal-grouped-and-auto-accessors/), [slides](https://1drv.ms/p/s!AjgWTO11Fk-Tkf5bHDNfAnGwyyzaKQ?e=Lgz7sc))
+
+## For Stage 3
+
+- [Symbols as WeakMap keys](https://github.com/tc39/proposal-symbols-as-weakmap-keys) for stage 3 \[[spec](https://tc39.es/proposal-symbols-as-weakmap-keys/)] \[[slides](http://www.rricard.me/serve/tc39-jun2022-symbols-as-wm-keys.pdf)] \[[diff](https://arai-a.github.io/ecma262-compare/?pr=2777)]
+- [RegExp Modifiers](https://github.com/tc39/proposal-regexp-modifiers) for Stage 3? ([spec](https://tc39.es/proposal-regexp-modifiers/), [slides](https://1drv.ms/p/s!AjgWTO11Fk-Tkf5daRnRsxu8BY5Nsg?e=UKVf8W), pending reviews)
+- [JSON.parse source text access](https://github.com/tc39/proposal-json-parse-with-source) for Stage 3 ([spec](https://tc39.es/proposal-json-parse-with-source/), [slides](https://docs.google.com/presentation/d/1C2RLbE-SS8ldlQPfXgsvKJBrEIZb4s57pOn-LxBNaC0/))
+
+## For Stage 4
+
+- [`findLast`/`findLastIndex`](https://github.com/tc39/proposal-array-find-from-last/) for stage 4 ([slides](https://github.com/DanielRosenwasser/findLast-and-findLastIndex-for-Stage-4/raw/main/findLast%20%26%20findLastIndex%20for%20Stage%204%20\(TC39%20June%202022\).pdf))
+
+## Others
+
+- [Array Grouping](https://github.com/tc39/proposal-array-grouping) [rename groupBy to group](https://github.com/tc39/proposal-array-grouping/pull/39)
+- ⏳ Decorators Normative Change: Flexible Initializers ([slides](https://slides.com/pzuraq/decorators-normative-changes-2022-06))
+- ShadowRealm: [Implementation Status and normative updates](https://github.com/tc39/proposal-shadowrealm/issues/365), (slides TBD)
+- [Errors across the ShadowRealm boundary](https://github.com/tc39/proposal-shadowrealm/issues/353)
+- [Temporal](https://tc39.es/proposal-temporal/) [normative changes](https://github.com/tc39/proposal-temporal/pulls?q=is%3Aopen+is%3Apr+milestone%3A%22Next+batch+of+normative+changes%22) ([slides](http://ptomato.name/talks/tc39-2022-06/))
+- Making TypedArray.prototype.with simpler in the change Array by copy proposal ([issue](https://github.com/tc39/proposal-change-array-by-copy/issues/85))
+- ⏳ `Intl.DurationFormat` stage 3 update ([slides](https://notes.ryzokuken.dev/p/ac-rg2kZH#/))
+- [function.sent](https://github.com/tc39/proposal-function.sent) update [slides](https://johnhax.net/2022/function-sent/slide)
+- [Import Reflection](https://github.com/tc39/proposal-import-reflection) status update & discussion ([slides](https://docs.google.com/presentation/d/1y0MAo7ymIWzyyrU9o3oKLiHc4BtQwLtqlU4Z_8_XYjU/edit#slide=id.p)))
 ```
