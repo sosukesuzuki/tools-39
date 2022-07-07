@@ -3,6 +3,8 @@ import parseMarkdown from "../utils/parse-markdown.ts";
 import toMarkdown from "../utils/to-markdown.ts";
 import { datetime, unistVisit } from "../../deps.ts";
 
+const toListItem = (value: string) => `- ${value}`;
+
 export interface Args {
   help: boolean;
 }
@@ -22,9 +24,8 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
     console.log(help);
     Deno.exit(0);
   }
-  const rawMonthSpecifier: string | null = typeof rawArgs._[0] === "string"
-    ? rawArgs._[0]
-    : null;
+  const rawMonthSpecifier: string | null =
+    typeof rawArgs._[0] === "string" ? rawArgs._[0] : null;
   if (rawMonthSpecifier === null) {
     console.error(help);
     console.error(`No month specifier given.`);
@@ -60,7 +61,22 @@ export default async function (rawArgs: Record<string, any>): Promise<void> {
   const ast = parseMarkdown(mdText);
   const proposals = getProposals(ast);
 
-  const output = proposals.map((p) => `- ${p}`).join("");
+  let output = "";
+  output += `# ${year}/${month} TC39 meeting agenda\n\n`;
+  output += "## For Stage 1\n\n";
+  output += proposals.forStage1.map(toListItem).join("");
+  output += "\n";
+  output += "## For Stage 2\n\n";
+  output += proposals.forStage2.map(toListItem).join("");
+  output += "\n";
+  output += "## For Stage 3\n\n";
+  output += proposals.forStage3.map(toListItem).join("");
+  output += "\n";
+  output += "## For Stage 4\n\n";
+  output += proposals.forStage4.map(toListItem).join("");
+  output += "\n";
+  output += "## Others\n\n";
+  output += proposals.others.map(toListItem).join("");
 
   console.log(output);
 }
@@ -71,11 +87,25 @@ function getAgendasURL(year: number, month: number) {
   return `https://raw.githubusercontent.com/tc39/agendas/HEAD/${stringifiedYear}/${stringifiedMonth}.md`;
 }
 
+type Proposals = {
+  forStage1: string[];
+  forStage2: string[];
+  forStage3: string[];
+  forStage4: string[];
+  others: string[];
+};
+
 function getProposals(
   // deno-lint-ignore no-explicit-any
-  ast: any,
-): string[] {
-  const proposals: string[] = [];
+  ast: any
+): Proposals {
+  const proposals: Proposals = {
+    forStage1: [],
+    forStage2: [],
+    forStage3: [],
+    forStage4: [],
+    others: [],
+  };
   unistVisit(ast, "listItem", (node) => {
     const includesProposalsTable = ((child) => {
       if (
@@ -92,27 +122,60 @@ function getProposals(
       const maybeTable = node.children.find(
         (
           // deno-lint-ignore no-explicit-any
-          child: any,
-        ) => child.type === "table",
+          child: any
+        ) => child.type === "table"
       );
       if (maybeTable) {
         const table = maybeTable;
-        for (
-          const row of table.children.filter(
+        for (const row of table.children.filter(
+          (
+            // deno-lint-ignore no-explicit-any
+            child: any,
+            i: number
+          ) => i !== 0 && child.type === "tableRow"
+        )) {
+          const cells = row.children.filter(
             (
               // deno-lint-ignore no-explicit-any
-              child: any,
-              i: number,
-            ) => i !== 0 && child.type === "tableRow",
-          )
-        ) {
-          const proposalCell = row.children.filter(
-            (
-              // deno-lint-ignore no-explicit-any
-              child: any,
-            ) => child.type === "tableCell",
-          )[3];
-          proposals.push(toMarkdown(proposalCell));
+              child: any
+            ) => child.type === "tableCell"
+          );
+          const stageCell = cells[1];
+          const proposalCell = cells[3];
+
+          let stage: 0 | 1 | 2 | 3 | 4 | null;
+          try {
+            stage = parseInt(stageCell.children[0].value, 10) as
+              | 0
+              | 1
+              | 2
+              | 3
+              | 4;
+          } catch {
+            stage = null;
+          }
+
+          const stringifiedProposal = toMarkdown(proposalCell);
+          if (stringifiedProposal.toLowerCase().includes("for stage ")) {
+            switch (stage) {
+              case 0:
+                proposals.forStage1.push(stringifiedProposal);
+                break;
+              case 1:
+                proposals.forStage2.push(stringifiedProposal);
+                break;
+              case 2:
+                proposals.forStage3.push(stringifiedProposal);
+                break;
+              case 3:
+                proposals.forStage4.push(stringifiedProposal);
+                break;
+              default:
+                proposals.others.push(stringifiedProposal);
+            }
+          } else {
+            proposals.others.push(stringifiedProposal);
+          }
         }
       }
     }
